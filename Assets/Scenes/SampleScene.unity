@@ -410,7 +410,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1793212756}
   m_Direction: 2
   m_Value: 0
-  m_Size: 1
+  m_Size: 0.9999907
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -2529,7 +2529,7 @@ GameObject:
   - component: {fileID: 623674425}
   - component: {fileID: 623674424}
   m_Layer: 5
-  m_Name: Questitems
+  m_Name: QuestitemPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2568,6 +2568,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15c300c3e6942d243942d28ea4de3755, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  content: {fileID: 2035174489}
 --- !u!114 &623674425
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2996,6 +2997,7 @@ MonoBehaviour:
   itemList: []
   itemContainer: {fileID: 850602625}
   itemTemplate: {fileID: 4060221696087445660, guid: 629d9fa7d23552242bf0367688e94b02, type: 3}
+  inventoryPanel: {fileID: 0}
   notificationText: {fileID: 0}
 --- !u!4 &643139601
 Transform:
@@ -4044,7 +4046,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.00032495553}
+  m_AnchoredPosition: {x: 0, y: 0.00021715561}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &850602626
@@ -4549,7 +4551,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1062511842}
   m_Direction: 2
   m_Value: 0
-  m_Size: 1
+  m_Size: 0.9999907
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -4679,7 +4681,6 @@ GameObject:
   - component: {fileID: 994552732}
   - component: {fileID: 994552731}
   - component: {fileID: 994552730}
-  - component: {fileID: 994552733}
   m_Layer: 5
   m_Name: Weapons
   m_TagString: Untagged
@@ -4763,7 +4764,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 994552733}
+      - m_Target: {fileID: 1809519494}
         m_TargetAssemblyTypeName: BasePanel, Assembly-CSharp
         m_MethodName: OpenPanel
         m_Mode: 1
@@ -4813,18 +4814,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 994552728}
   m_CullTransparentMesh: 1
---- !u!114 &994552733
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 994552728}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 15c300c3e6942d243942d28ea4de3755, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1028550661
 GameObject:
   m_ObjectHideFlags: 0
@@ -6706,7 +6695,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.0003859907}
+  m_AnchoredPosition: {x: 0, y: 0.00021715561}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1676800826
@@ -6993,7 +6982,7 @@ GameObject:
   - component: {fileID: 1809519491}
   - component: {fileID: 1809519494}
   m_Layer: 5
-  m_Name: Weapons
+  m_Name: WeaponPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7100,6 +7089,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15c300c3e6942d243942d28ea4de3755, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  content: {fileID: 850602625}
 --- !u!1 &1814147468
 GameObject:
   m_ObjectHideFlags: 0
@@ -7258,7 +7248,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1448356700}
   m_Direction: 2
   m_Value: 0
-  m_Size: 0.9999986
+  m_Size: 0.9999907
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -7448,7 +7438,7 @@ GameObject:
   - component: {fileID: 1873867233}
   - component: {fileID: 1873867236}
   m_Layer: 5
-  m_Name: Food
+  m_Name: FoodPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7555,6 +7545,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15c300c3e6942d243942d28ea4de3755, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  content: {fileID: 1676800825}
 --- !u!1 &1920984335
 GameObject:
   m_ObjectHideFlags: 0
@@ -8052,7 +8043,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.0008197715}
+  m_AnchoredPosition: {x: 0, y: 0.00021715561}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &2035174490

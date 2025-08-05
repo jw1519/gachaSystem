@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using static UnityEditor.Progress;
 
 namespace Inventory
 {
@@ -14,6 +13,8 @@ namespace Inventory
         public Transform itemContainer;
         public GameObject itemTemplate;
 
+        public InventoryPanel inventoryPanel;
+
         public TextMeshProUGUI notificationText;
 
         private void Awake()
@@ -22,6 +23,10 @@ namespace Inventory
             {
                 instance = this;
             }
+        }
+        private void Start()
+        {
+            inventoryPanel = UIManager.instance.panels.Find(panel => panel.name == "InventoryPanel").gameObject.GetComponent<InventoryPanel>();
         }
         //add and remove Items
         public void AddItem(BaseItem item, int amountToAdd)
@@ -82,6 +87,11 @@ namespace Inventory
             {
                 UpdateStackAmount(stackable);
             }
+            if (inventoryPanel != null)
+            {
+                inventoryPanel.AddItemToPanel(item, gameObject.transform);
+            }
+            
 
         }
         public void UpdateStackAmount(StackableItem stackable)
