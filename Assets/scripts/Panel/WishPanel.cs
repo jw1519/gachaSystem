@@ -5,14 +5,11 @@ public class WishPanel : BasePanel
     Transform wishItemparent;
     private void Awake()
     {
-        wishItemparent = GetComponentInChildren<Transform>();
+        wishItemparent = transform.GetChild(0);
     }
     public override void ClosePanel()
     {
-        foreach (Transform transform in wishItemparent)
-        {
-            transform.gameObject.SetActive(false);
-        }
+        Destroy(wishItemparent.GetChild(0).gameObject);
         base.ClosePanel();
     }
 }
