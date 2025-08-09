@@ -93,6 +93,10 @@ namespace Inventory
                 {
                     inventoryPanel.AddItemToPanel(item, gameObject.transform);
                 }
+                else
+                {
+
+                }
             }
             
 
