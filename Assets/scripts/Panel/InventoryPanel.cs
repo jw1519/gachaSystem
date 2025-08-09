@@ -17,13 +17,13 @@ public class InventoryPanel : BasePanel
     {
         switch (item.itemType)
         {
-            case ItemType.Weapon:
+            case Type.Weapon:
                 itemGO.SetParent(inventPanels.Find(panel => panel.name == "WeaponPanel").content);
                 break;
-            case ItemType.Food:
+            case Type.Food:
                 itemGO.SetParent(inventPanels.Find(panel => panel.name == "FoodPanel").content);
                 break;
-            case ItemType.QuestItem:
+            case Type.QuestItem:
                 itemGO.SetParent(inventPanels.Find(panel => panel.name == "QuestItemPanel").content);
                 break;
         }

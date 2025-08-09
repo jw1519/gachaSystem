@@ -49,3 +49,4 @@ MonoBehaviour:
   rate: 40
   reward:
   - {fileID: 11400000, guid: 6684468f5b6ff6b469c4c2789b497ced, type: 2}
+  - {fileID: 11400000, guid: 2076a5d0ea278cb4aba8e82595bc38dd, type: 2}

@@ -89,7 +89,10 @@ namespace Inventory
             }
             if (inventoryPanel != null)
             {
-                inventoryPanel.AddItemToPanel(item, gameObject.transform);
+                if (item.itemType != Type.Character)
+                {
+                    inventoryPanel.AddItemToPanel(item, gameObject.transform);
+                }
             }
             
 

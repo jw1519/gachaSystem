@@ -4,12 +4,13 @@ public class BaseItem : ScriptableObject
 {
     public Sprite itemSprite;
     public string itemName;
-    public ItemType itemType;
+    public Type itemType;
 }
 
-public enum ItemType
+public enum Type
 {
     Weapon,
     Food,
-    QuestItem
+    QuestItem,
+    Character,
 }

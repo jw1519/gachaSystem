@@ -32,7 +32,7 @@ public class GachaSystem : MonoBehaviour
                 if (gachaRate[i].rate <= random)
                 {
                     WishItem wishItem = Reward(gachaRate[i].rarety);
-                    if (wishItem.itemType == ItemType.Weapon)
+                    if (wishItem.itemType == Type.Weapon)
                     {
                         Inventory.Inventory.instance.AddItem(wishItem, 1);
                     }

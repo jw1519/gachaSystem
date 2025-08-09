@@ -4,10 +4,10 @@ using UnityEngine;
     [CreateAssetMenu(fileName = "WishItem", menuName = "wishItems")]
     public class WishItem : BaseItem
     {
-        public ItemRarety itemRarety;
+        public Rarety itemRarety;
     }
 
-    public enum ItemRarety
+    public enum Rarety
     {
         ThreeStar,
         FourStar,
