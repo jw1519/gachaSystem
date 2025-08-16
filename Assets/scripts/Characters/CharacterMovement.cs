@@ -96,10 +96,8 @@ public class CharacterMovement : MonoBehaviour, IJump
     }
     public void ChangeAnimation(string animation, float crossFade = 0.2f)
     {
-        
         if (currentAnimation != animation)
         {
-            Debug.Log("got here");
             currentAnimation = animation;
             animator.CrossFade(animation, crossFade);
         }
