@@ -1,35 +1,73 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class CharacterMovement : MonoBehaviour, IJump
 {
+    InputSystem_Actions playerInputActions;
+    InputAction move;
+
+    [Header("movement")]
     public Rigidbody rb;
     public int movementSpeed;
     public int jumpPower;
+    Vector3 forceDirection = Vector3.zero;
+    [SerializeField] Camera cam;
+    
+
+    [Header("animation")]
+    Animator animator;
+    public string currentAnimation = "";
 
     [Header("GroundCheck")]
     public Transform GroundCheckPos;
     public Vector3 groundCheckSize = Vector2.one;
     public LayerMask groundLayer;
-
-    float horizontalMovement;
-    float verticalMovement;
+    public int maxForce;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
+        animator = GetComponent<Animator>();
+
+        ChangeAnimation("HumanM@Idle01");
+        Cursor.lockState = CursorLockMode.Locked;
+        playerInputActions = new InputSystem_Actions();
+
     }
-    private void Update()
+    private void OnEnable()
     {
-        Vector3 move = new Vector3(horizontalMovement, 0, verticalMovement) * movementSpeed;
-        rb.linearVelocity = new Vector3(move.x, rb.linearVelocity.y, move.z);
+        playerInputActions.Player.Jump.started += Jump;
+        move = playerInputActions.Player.Move;
+        playerInputActions.Enable();
     }
-    public void Move(InputAction.CallbackContext context)
+    private void OnDisable()
     {
-        Vector2 input = context.ReadValue<Vector2>();
-        horizontalMovement = input.x;
-        verticalMovement = input.y;
+        playerInputActions.Player.Jump.started -= Jump;
+        playerInputActions.Disable();
+    }
+    private void FixedUpdate()
+    {
+        forceDirection += move.ReadValue<Vector2>().x * GetCameraRight(cam) * movementSpeed;
+        forceDirection += move.ReadValue<Vector2>().y * GetCameraForward(cam) * movementSpeed;
+
+        rb.AddForce(forceDirection, ForceMode.Impulse);
+        forceDirection = Vector3.zero;
+    }
+
+    private Vector3 GetCameraForward(Camera cam)
+    {
+        Vector3 forward = cam.transform.forward;
+        forward.y = 0;
+        return forward.normalized;
+    }
+
+    private Vector3 GetCameraRight(Camera cam)
+    {
+        Vector3 right = cam.transform.right;
+        right.y = 0;
+        return right.normalized;
     }
     public void Jump(InputAction.CallbackContext context)
     {
@@ -43,8 +81,7 @@ public class CharacterMovement : MonoBehaviour, IJump
             {
                 rb.linearVelocity = new Vector3(rb.linearVelocity.x, rb.linearVelocity.y * 0.5f, rb.linearVelocity.z);
             }
-        }
-            
+        }   
     }
     private bool isGrounded()
     {
@@ -58,5 +95,17 @@ public class CharacterMovement : MonoBehaviour, IJump
     {
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireCube(GroundCheckPos.position, groundCheckSize);
+    }
+    public void ChangeAnimation(string animation, float crossFade = 0.2f)
+    {
+        if (currentAnimation != animation)
+        {
+            currentAnimation = animation;
+            animator.CrossFade(animation, crossFade);
+        }
+    }
+    public void CheckAnimation()
+    {
+        
     }
 }
