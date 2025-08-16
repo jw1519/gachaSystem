@@ -23,7 +23,6 @@ public class CharacterMovement : MonoBehaviour, IJump
     public Transform GroundCheckPos;
     public Vector3 groundCheckSize = Vector2.one;
     public LayerMask groundLayer;
-    public int maxForce;
 
     private void Awake()
     {
@@ -31,10 +30,8 @@ public class CharacterMovement : MonoBehaviour, IJump
         rb.freezeRotation = true;
         animator = GetComponent<Animator>();
 
-        ChangeAnimation("HumanM@Idle01");
         Cursor.lockState = CursorLockMode.Locked;
         playerInputActions = new InputSystem_Actions();
-
     }
     private void OnEnable()
     {
@@ -53,6 +50,7 @@ public class CharacterMovement : MonoBehaviour, IJump
         forceDirection += move.ReadValue<Vector2>().y * GetCameraForward(cam) * movementSpeed;
 
         rb.AddForce(forceDirection, ForceMode.Impulse);
+        CheckAnimation();
         forceDirection = Vector3.zero;
     }
 
@@ -98,14 +96,35 @@ public class CharacterMovement : MonoBehaviour, IJump
     }
     public void ChangeAnimation(string animation, float crossFade = 0.2f)
     {
+        
         if (currentAnimation != animation)
         {
+            Debug.Log("got here");
             currentAnimation = animation;
             animator.CrossFade(animation, crossFade);
         }
     }
     public void CheckAnimation()
     {
-        
+        if (forceDirection.z == movementSpeed)
+        {
+            ChangeAnimation("HumanM@Walk01_Forward [RM]");
+        }
+        else if (forceDirection.z == -movementSpeed)
+        {
+            ChangeAnimation("HumanM@Walk01_Backward [RM]");
+        }
+        else if (forceDirection.x == movementSpeed)
+        {
+            ChangeAnimation("HumanM@Walk01_Right [RM]");
+        }
+        else if (forceDirection.x == -movementSpeed)
+        {
+            ChangeAnimation("HumanM@Walk01_Left [RM]");
+        }
+        else
+        {
+            ChangeAnimation("HumanM@Idle01");
+        }
     }
 }

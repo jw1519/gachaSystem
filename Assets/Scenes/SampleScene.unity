@@ -6422,6 +6422,7 @@ MonoBehaviour:
   rb: {fileID: 1475810235}
   movementSpeed: 5
   jumpPower: 5
+  cam: {fileID: 330585545}
   currentAnimation: 
   GroundCheckPos: {fileID: 1950958804}
   groundCheckSize: {x: 1, y: 0.25, z: 1}
@@ -6606,9 +6607,9 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.44102734
-  m_Height: 1.9090645
+  m_Height: 1.9004382
   m_Direction: 1
-  m_Center: {x: -0.007182896, y: 0.83264625, z: 0}
+  m_Center: {x: -0.007182896, y: 0.8369594, z: 0}
 --- !u!1 &1479401813
 GameObject:
   m_ObjectHideFlags: 0
