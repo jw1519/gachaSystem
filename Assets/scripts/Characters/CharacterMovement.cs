@@ -28,8 +28,7 @@ public class CharacterMovement : MonoBehaviour, IJump
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
         animator = GetComponent<Animator>();
-
-        Cursor.lockState = CursorLockMode.Locked;
+        //Cursor.lockState = CursorLockMode.Locked;
         playerInputActions = new InputSystem_Actions();
     }
     private void OnEnable()
