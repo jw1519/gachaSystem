@@ -7,15 +7,6 @@ public class GachaSystem : MonoBehaviour
     [SerializeField] Transform parent, pos;
     [SerializeField] GameObject wishItemPrefab;
     public int wishCost;
-    private void Awake()
-    {
-        //for (int i = 0; i < 10; i++)
-        //{
-        //    GameObject instance = Instantiate(wishItemPrefab, pos.position, Quaternion.identity);
-        //    instance.transform.SetParent(pos);
-        //    instance.transform.localScale = Vector3.one;
-        //}
-    }
     public void OneWish()
     {
         if (wishItemPrefab != null)

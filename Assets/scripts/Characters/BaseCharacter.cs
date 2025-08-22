@@ -10,6 +10,7 @@ namespace Character
 
         [Header("Character Sprite")]
         public Sprite characterSprite;
+        public Sprite characterProfileSprite;
 
         [Header("Stats")]
         public string characterName;
