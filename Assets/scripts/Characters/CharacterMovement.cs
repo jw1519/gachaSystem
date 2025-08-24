@@ -5,6 +5,7 @@ public class CharacterMovement : MonoBehaviour, IJump
 {
     InputSystem_Actions playerInputActions;
     InputAction move;
+    CharacterAnimationContoller animationController;
 
     [Header("movement")]
     public Rigidbody rb;
@@ -12,11 +13,6 @@ public class CharacterMovement : MonoBehaviour, IJump
     public int jumpPower;
     Vector3 forceDirection = Vector3.zero;
     [SerializeField] Camera cam;
-    
-
-    [Header("animation")]
-    Animator animator;
-    public string currentAnimation = "";
 
     [Header("GroundCheck")]
     public Transform GroundCheckPos;
@@ -27,9 +23,9 @@ public class CharacterMovement : MonoBehaviour, IJump
     {
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
-        animator = GetComponent<Animator>();
         //Cursor.lockState = CursorLockMode.Locked;
         playerInputActions = new InputSystem_Actions();
+        animationController = GetComponent<CharacterAnimationContoller>();
     }
     private void OnEnable()
     {
@@ -48,7 +44,7 @@ public class CharacterMovement : MonoBehaviour, IJump
         forceDirection += move.ReadValue<Vector2>().y * GetCameraForward(cam) * movementSpeed;
 
         rb.AddForce(forceDirection, ForceMode.Impulse);
-        CheckAnimation();
+        animationController.CheckAnimation(forceDirection, movementSpeed);
         forceDirection = Vector3.zero;
     }
 
@@ -92,35 +88,5 @@ public class CharacterMovement : MonoBehaviour, IJump
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireCube(GroundCheckPos.position, groundCheckSize);
     }
-    public void ChangeAnimation(string animation, float crossFade = 0.2f)
-    {
-        if (currentAnimation != animation)
-        {
-            currentAnimation = animation;
-            animator.CrossFade(animation, crossFade);
-        }
-    }
-    public void CheckAnimation()
-    {
-        if (forceDirection.z == movementSpeed)
-        {
-            ChangeAnimation("HumanM@Walk01_Forward [RM]");
-        }
-        else if (forceDirection.z == -movementSpeed)
-        {
-            ChangeAnimation("HumanM@Walk01_Backward [RM]");
-        }
-        else if (forceDirection.x == movementSpeed)
-        {
-            ChangeAnimation("HumanM@Walk01_Right [RM]");
-        }
-        else if (forceDirection.x == -movementSpeed)
-        {
-            ChangeAnimation("HumanM@Walk01_Left [RM]");
-        }
-        else
-        {
-            ChangeAnimation("HumanM@Idle01");
-        }
-    }
+
 }
