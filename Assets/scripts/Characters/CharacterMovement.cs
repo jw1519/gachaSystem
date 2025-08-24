@@ -30,12 +30,14 @@ public class CharacterMovement : MonoBehaviour, IJump
     private void OnEnable()
     {
         playerInputActions.Player.Jump.started += Jump;
+        playerInputActions.Player.Attack.started += Attack;
         move = playerInputActions.Player.Move;
         playerInputActions.Enable();
     }
     private void OnDisable()
     {
         playerInputActions.Player.Jump.started -= Jump;
+        playerInputActions.Player.Attack.started -= Attack;
         playerInputActions.Disable();
     }
     private void FixedUpdate()
@@ -44,7 +46,7 @@ public class CharacterMovement : MonoBehaviour, IJump
         forceDirection += move.ReadValue<Vector2>().y * GetCameraForward(cam) * movementSpeed;
 
         rb.AddForce(forceDirection, ForceMode.Impulse);
-        animationController.CheckAnimation(forceDirection, movementSpeed);
+        animationController.CheckMovementAnimation(forceDirection, movementSpeed);
         forceDirection = Vector3.zero;
     }
 
@@ -88,5 +90,32 @@ public class CharacterMovement : MonoBehaviour, IJump
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireCube(GroundCheckPos.position, groundCheckSize);
     }
-
+    int attack = 0;
+    public void Attack(InputAction.CallbackContext context)
+    {
+        if (isGrounded() == true)
+        {
+            animationController.isAttacking = true;
+            switch(attack)
+            {
+                case 0:
+                    animationController.ChangeAnimation("HumanM@AttackPolearm01");
+                    attack++;
+                    break; 
+                case 1:
+                    animationController.ChangeAnimation("HumanM@AttackPolearm02");
+                    attack++;
+                    break;
+                case 2:
+                    animationController.ChangeAnimation("HumanM@AttackPolearm03");
+                    attack++;
+                    break; 
+                case 3:
+                    animationController.ChangeAnimation("HumanM@AttackPolearm04");
+                    attack = 0;
+                    break;
+            }
+            
+        }
+    }
 }
