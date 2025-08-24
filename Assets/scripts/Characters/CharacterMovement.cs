@@ -95,27 +95,32 @@ public class CharacterMovement : MonoBehaviour, IJump
     {
         if (isGrounded() == true)
         {
-            animationController.isAttacking = true;
-            switch(attack)
+            if (animationController.isAttacking == false)
             {
-                case 0:
-                    animationController.ChangeAnimation("HumanM@AttackPolearm01");
-                    attack++;
-                    break; 
-                case 1:
-                    animationController.ChangeAnimation("HumanM@AttackPolearm02");
-                    attack++;
-                    break;
-                case 2:
-                    animationController.ChangeAnimation("HumanM@AttackPolearm03");
-                    attack++;
-                    break; 
-                case 3:
-                    animationController.ChangeAnimation("HumanM@AttackPolearm04");
-                    attack = 0;
-                    break;
+                switch (attack)
+                {
+                    case 0:
+                        animationController.ChangeAnimation("HumanM@AttackPolearm01");
+                        animationController.isAttacking = true;
+                        attack++;
+                        break;
+                    case 1:
+                        animationController.ChangeAnimation("HumanM@AttackPolearm02");
+                        animationController.isAttacking = true;
+                        attack++;
+                        break;
+                    case 2:
+                        animationController.ChangeAnimation("HumanM@AttackPolearm03");
+                        animationController.isAttacking = true;
+                        attack++;
+                        break;
+                    case 3:
+                        animationController.ChangeAnimation("HumanM@AttackPolearm04");
+                        animationController.isAttacking = true;
+                        attack = 0;
+                        break;
+                }
             }
-            
         }
     }
 }

@@ -10,7 +10,7 @@ public class CharacterAnimationContoller : MonoBehaviour
     {
         animator = GetComponent<Animator>();
     }
-    public void ChangeAnimation(string animation, float crossFade = 0.2f, float time = 0) // can spam attack and charataracter freaks out
+    public void ChangeAnimation(string animation, float crossFade = 0.2f, float time = 0)
     {
         if (time > 0) //time is how long the animation lasts
             StartCoroutine(Wait());
