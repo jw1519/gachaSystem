@@ -7395,6 +7395,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentAnimation: 
+  isAttacking: 0
 --- !u!1 &1479401813
 GameObject:
   m_ObjectHideFlags: 0
