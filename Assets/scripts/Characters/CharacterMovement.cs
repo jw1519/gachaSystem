@@ -1,3 +1,5 @@
+using Character;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -6,6 +8,9 @@ public class CharacterMovement : MonoBehaviour, IJump
     InputSystem_Actions playerInputActions;
     InputAction move;
     CharacterAnimationContoller animationController;
+    BaseCharacter character;
+
+    public AttackArea attackArea;
 
     [Header("movement")]
     public Rigidbody rb;
@@ -26,6 +31,7 @@ public class CharacterMovement : MonoBehaviour, IJump
         //Cursor.lockState = CursorLockMode.Locked;
         playerInputActions = new InputSystem_Actions();
         animationController = GetComponent<CharacterAnimationContoller>();
+        character = GetComponent<BaseCharacter>();
     }
     private void OnEnable()
     {
@@ -102,25 +108,36 @@ public class CharacterMovement : MonoBehaviour, IJump
                     case 0:
                         animationController.ChangeAnimation("HumanM@AttackPolearm01");
                         animationController.isAttacking = true;
+                        Hit();
                         attack++;
                         break;
                     case 1:
                         animationController.ChangeAnimation("HumanM@AttackPolearm02");
                         animationController.isAttacking = true;
+                        Hit();
                         attack++;
                         break;
                     case 2:
                         animationController.ChangeAnimation("HumanM@AttackPolearm03");
                         animationController.isAttacking = true;
+                        Hit();
                         attack++;
                         break;
                     case 3:
                         animationController.ChangeAnimation("HumanM@AttackPolearm04");
                         animationController.isAttacking = true;
+                        Hit();
                         attack = 0;
                         break;
                 }
             }
+        }
+    }
+    public void Hit()
+    {
+        foreach (var attackAreaDamagables in attackArea.damagables)
+        {
+            attackAreaDamagables.TakeDamage(character.damage);
         }
     }
 }

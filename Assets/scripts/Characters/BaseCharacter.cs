@@ -16,6 +16,7 @@ namespace Character
         public string characterName;
         public int health;
         public int maxHealth;
+        public int damage;
         public int defence;
 
         [Header("Energy")]

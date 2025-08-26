@@ -2,9 +2,11 @@ using System;
 using UnityEditor.Animations;
 using UnityEngine;
 
+
 namespace Enemy
 {
-    public abstract class BaseEnemy : ScriptableObject, ITakeDamage, IHeal
+    [CreateAssetMenu(fileName = "New Enemy", menuName = "enemy")]
+    public class BaseEnemy : ScriptableObject, ITakeDamage, IHeal
     {
         public static event Action enemyHealthChange;
         public static event Action enemyDefenceChange;
@@ -37,6 +39,7 @@ namespace Enemy
 
         public virtual void TakeDamage(int damageTaken)
         {
+            Debug.Log("Take damage");
             //check for defences
             if (defence > 0)
             {

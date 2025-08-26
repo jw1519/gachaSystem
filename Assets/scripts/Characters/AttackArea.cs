@@ -1,16 +1,25 @@
+using Enemy;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class AttackArea : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public List<ITakeDamage> damagables { get; } = new();
+    private void OnTriggerEnter(Collider other)
     {
-        
+        var damage = other.GetComponent<SetEnemy>().enemy;
+        if (damage != null)
+        {
+            Debug.Log("here");
+            damagables.Add(damage);
+        }
     }
-
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerExit(Collider other)
     {
-        
+        var damage = other.GetComponent<SetEnemy>().enemy;
+        if ( damage != null && damagables.Contains(damage))
+        {
+            damagables.Remove(damage);
+        }
     }
 }
