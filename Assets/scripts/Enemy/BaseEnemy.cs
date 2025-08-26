@@ -22,6 +22,7 @@ namespace Enemy
         public int defence;
         public int abilityAmount;
 
+
         public bool isAlive => health > 0;
 
         public void Heal(int healAmount)
@@ -39,7 +40,6 @@ namespace Enemy
 
         public virtual void TakeDamage(int damageTaken)
         {
-            Debug.Log("Take damage");
             //check for defences
             if (defence > 0)
             {
