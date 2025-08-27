@@ -59,8 +59,8 @@ namespace Enemy
             if (health - damageTaken > 0)
             {
                 health -= damageTaken;
-                controller.ChangeAnimation("TakeDamage01", 0.2f, 3f);
-                Debug.Log("here");
+                controller.ChangeAnimation("TakeDamage01");
+                controller.performingAction = true;
                 enemyHealthChange?.Invoke();
             }
             else

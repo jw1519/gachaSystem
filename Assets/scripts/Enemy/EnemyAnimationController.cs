@@ -5,7 +5,7 @@ public class EnemyAnimationController : MonoBehaviour
 {
     Animator animator;
     public string currentAnimation = "";
-    public bool isAttacking = false;
+    public bool performingAction = false;
     private void Awake()
     {
         animator = GetComponent<Animator>();
@@ -21,7 +21,7 @@ public class EnemyAnimationController : MonoBehaviour
         {
             yield return new WaitForSeconds(time);
             Validate();
-            isAttacking = false;
+            performingAction = false;
         }
         void Validate()
         {
@@ -34,7 +34,7 @@ public class EnemyAnimationController : MonoBehaviour
     }
     public void CheckMovementAnimation(Vector3 forceDirection, int movementSpeed)
     {
-        if (isAttacking) return;
+        if (performingAction) return;
         if (forceDirection.z == movementSpeed)
         {
             ChangeAnimation("HumanM@Walk01_Forward [RM]");
