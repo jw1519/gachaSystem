@@ -7,19 +7,16 @@ public class AttackArea : MonoBehaviour
     public List<ITakeDamage> damagables { get; } = new();
     private void OnTriggerEnter(Collider other)
     {
-        var damage = other.GetComponent<SetEnemy>().enemy;
-        if (damage != null)
+        if (other.GetComponent<SetEnemy>().enemy != null)
         {
-            Debug.Log("here");
-            damagables.Add(damage);
+            damagables.Add(other.GetComponent<SetEnemy>().enemy);
         }
     }
     private void OnTriggerExit(Collider other)
     {
-        var damage = other.GetComponent<SetEnemy>().enemy;
-        if ( damage != null && damagables.Contains(damage))
+        if (other.GetComponent<SetEnemy>().enemy != null && damagables.Contains(other.GetComponent<SetEnemy>().enemy))
         {
-            damagables.Remove(damage);
+            damagables.Remove(other.GetComponent<SetEnemy>().enemy);
         }
     }
 }

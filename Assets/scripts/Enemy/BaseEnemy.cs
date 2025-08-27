@@ -13,6 +13,7 @@ namespace Enemy
         public static event Action enemydied;
 
         public GameObject EnemyPrefab;
+        [HideInInspector] public EnemyAnimationController controller;
 
         [Header("Stats")]
         public string enemyName;
@@ -45,7 +46,7 @@ namespace Enemy
             {
                 if (defence >= damageTaken)
                 {
-                    defence = defence - damageTaken;
+                    defence -= damageTaken;
                     damageTaken = 0;
                 }
                 else
@@ -57,14 +58,16 @@ namespace Enemy
             }
             if (health - damageTaken > 0)
             {
-                health = health - damageTaken;
+                health -= damageTaken;
+                controller.ChangeAnimation("TakeDamage01", 0.2f, 3f);
+                Debug.Log("here");
                 enemyHealthChange?.Invoke();
             }
             else
             {
                 health = 0;
                 enemydied?.Invoke();
-
+                controller.ChangeAnimation("Dead");
             }
 
         }

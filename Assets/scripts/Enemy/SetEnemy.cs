@@ -5,20 +5,25 @@ namespace Enemy
     public class SetEnemy : MonoBehaviour
     {
         public BaseEnemy enemy;
-        EnemyAnimationController controller;
 
         private void Awake()
         {
-            controller = GetComponent<EnemyAnimationController>();
+            enemy.controller = GetComponent<EnemyAnimationController>();     
         }
-
         private void Start()
         {
-            
+            enemy.controller.ChangeAnimation("Idle");
+            Debug.Log("start");
         }
         private void FixedUpdate()
         {
-            controller.ChangeAnimation("Idle");
+            //if (!enemy.controller.isAttacking)
+            //{
+            //    if (enemy.health > 0)
+            //    {
+            //        enemy.controller.ChangeAnimation("Idle");
+            //    }
+            //}
         }
     }
 }
