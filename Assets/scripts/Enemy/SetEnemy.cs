@@ -5,10 +5,18 @@ namespace Enemy
     public class SetEnemy : MonoBehaviour
     {
         public BaseEnemy enemy;
-
         private void Awake()
         {
-            enemy.controller = GetComponent<EnemyAnimationController>();     
+            enemy.controller = GetComponent<EnemyAnimationController>();    
+            if (enemy.controller != null )
+            {
+                gameObject.AddComponent<EnemyAnimationController>();
+            }
+            enemy = Instantiate(enemy);
+        }
+        private void OnEnable()
+        {
+            BaseEnemy.enemyHealthDecrease += CreateDamagePopUp;
         }
 
         private void FixedUpdate()
@@ -20,6 +28,12 @@ namespace Enemy
                     enemy.controller.ChangeAnimation("Idle");
                 }
             }
+        }
+        private void CreateDamagePopUp(int damage, BaseEnemy enemy)
+        {
+            if (enemy.name != this.enemy.name)
+                return;
+            DamagePopUp.Create(transform.position, damage);
         }
     }
 }

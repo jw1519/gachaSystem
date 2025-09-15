@@ -1,5 +1,4 @@
 using System;
-using UnityEditor.Animations;
 using UnityEngine;
 
 
@@ -8,8 +7,8 @@ namespace Enemy
     [CreateAssetMenu(fileName = "New Enemy", menuName = "enemy")]
     public class BaseEnemy : ScriptableObject, ITakeDamage, IHeal
     {
-        public static event Action enemyHealthChange;
-        public static event Action enemyDefenceChange;
+        public static event Action<int, BaseEnemy> enemyHealthDecrease;
+        public static event Action enemyDefenceDeacrease;
         public static event Action enemydied;
 
         public GameObject EnemyPrefab;
@@ -22,8 +21,6 @@ namespace Enemy
         public int damage;
         public int defence;
         public int abilityAmount;
-
-
         public bool isAlive => health > 0;
 
         public void Heal(int healAmount)
@@ -36,7 +33,7 @@ namespace Enemy
             {
                 health = maxHealth;
             }
-            enemyHealthChange?.Invoke();
+            enemyHealthDecrease?.Invoke(healAmount, this);
         }
 
         public virtual void TakeDamage(int damageTaken)
@@ -54,14 +51,14 @@ namespace Enemy
                     damageTaken = damageTaken - defence;
                     defence = 0;
                 }
-                enemyDefenceChange?.Invoke();
+                enemyDefenceDeacrease?.Invoke();
             }
             if (health - damageTaken > 0)
             {
                 health -= damageTaken;
                 controller.ChangeAnimation("TakeDamage01");
                 controller.performingAction = true;
-                enemyHealthChange?.Invoke();
+                enemyHealthDecrease?.Invoke(damageTaken, this);
             }
             else
             {
