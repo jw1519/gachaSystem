@@ -1,5 +1,4 @@
 using Character;
-using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -133,11 +132,12 @@ public class CharacterMovement : MonoBehaviour, IJump
             }
         }
     }
+
     public void Hit()
     {
         foreach (var attackAreaDamagables in attackArea.damagables)
         {
-            attackAreaDamagables.TakeDamage(character.damage);
+            attackAreaDamagables.TakeDamage(character.damage, character.IsCriticalHit());
         }
     }
 }

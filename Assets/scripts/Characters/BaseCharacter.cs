@@ -18,6 +18,8 @@ namespace Character
         public int maxHealth;
         public int damage;
         public int defence;
+        public int critPercent;
+        public int critDamagePercent;
 
         [Header("Energy")]
         public int energy;
@@ -41,7 +43,7 @@ namespace Character
             playerHealthChanged?.Invoke();
         }
 
-        public void TakeDamage(int damageTaken)
+        public void TakeDamage(int damageTaken, bool isCritHit)
         {
             //check for defences
             if (defence > 0)
@@ -75,6 +77,10 @@ namespace Character
             {
                 energy -= amount;
             }
+        }
+        public bool IsCriticalHit()
+        {
+            return UnityEngine.Random.Range(0, 100) < critPercent;
         }
     }
 }

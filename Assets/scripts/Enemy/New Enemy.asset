@@ -15,7 +15,7 @@ MonoBehaviour:
   EnemyPrefab: {fileID: 0}
   controller: {fileID: 0}
   enemyName: 
-  health: 155
+  health: 100
   maxHealth: 100
   damage: 5
   defence: 0

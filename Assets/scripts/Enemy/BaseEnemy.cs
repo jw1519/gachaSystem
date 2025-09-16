@@ -7,7 +7,7 @@ namespace Enemy
     [CreateAssetMenu(fileName = "New Enemy", menuName = "enemy")]
     public class BaseEnemy : ScriptableObject, ITakeDamage, IHeal
     {
-        public static event Action<int, BaseEnemy> enemyHealthDecrease;
+        public static event Action<int, BaseEnemy, bool> enemyHealthDecrease;
         public static event Action enemyDefenceDeacrease;
         public static event Action enemydied;
 
@@ -33,10 +33,10 @@ namespace Enemy
             {
                 health = maxHealth;
             }
-            enemyHealthDecrease?.Invoke(healAmount, this);
+            //enemyHealthDecrease?.Invoke(healAmount, this);
         }
 
-        public virtual void TakeDamage(int damageTaken)
+        public virtual void TakeDamage(int damageTaken, bool isCritHit)
         {
             //check for defences
             if (defence > 0)
@@ -58,7 +58,7 @@ namespace Enemy
                 health -= damageTaken;
                 controller.ChangeAnimation("TakeDamage01");
                 controller.performingAction = true;
-                enemyHealthDecrease?.Invoke(damageTaken, this);
+                enemyHealthDecrease?.Invoke(damageTaken, this, isCritHit);
             }
             else
             {

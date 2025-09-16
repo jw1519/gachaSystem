@@ -29,11 +29,11 @@ namespace Enemy
                 }
             }
         }
-        private void CreateDamagePopUp(int damage, BaseEnemy enemy)
+        private void CreateDamagePopUp(int damage, BaseEnemy enemy, bool isCrit)
         {
             if (enemy.name != this.enemy.name)
                 return;
-            DamagePopUp.Create(transform.position, damage);
+            DamagePopUp.Create(transform.position, damage, isCrit);
         }
     }
 }

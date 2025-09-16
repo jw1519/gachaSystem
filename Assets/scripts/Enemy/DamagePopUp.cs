@@ -6,11 +6,11 @@ public class DamagePopUp : MonoBehaviour
     TextMeshPro text;
     Color textColor;
     float dissapearTimer;
-    public static DamagePopUp Create(Vector3 position, int damageAmount)
+    public static DamagePopUp Create(Vector3 position, int damageAmount, bool iscriticalHit)
     {
         Transform damagePopUpTransform = Instantiate(GameAssets.i.damagePopupPrefab, position, Quaternion.identity); 
         DamagePopUp damagePopUp = damagePopUpTransform.GetComponent<DamagePopUp>();
-        damagePopUp.SetUp(damageAmount);
+        damagePopUp.SetUp(damageAmount, iscriticalHit);
         return damagePopUp;
     }
     private void Awake()
@@ -34,10 +34,20 @@ public class DamagePopUp : MonoBehaviour
             }
         }
     }
-    public void SetUp(int amount)
+    public void SetUp(int amount, bool isCriticalHit)
     {
         text.text = amount.ToString();
-        textColor = text.color;
+        if (isCriticalHit == true)
+        {
+            text.fontSize = 4f;
+            textColor = Color.red;
+        }
+        else
+        {
+            text.fontSize = 2.2f;
+            textColor = Color.yellow;
+        }
+        text.color = textColor;
         dissapearTimer = 1f;
     }
 }
