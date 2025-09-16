@@ -22,7 +22,10 @@ namespace Enemy
         public int defence;
         public int abilityAmount;
         public bool isAlive => health > 0;
-
+        private void Awake()
+        {
+            health = maxHealth;
+        }
         public void Heal(int healAmount)
         {
             if (health + healAmount <= maxHealth)
@@ -63,6 +66,7 @@ namespace Enemy
             else
             {
                 health = 0;
+                enemyHealthDecrease?.Invoke(damageTaken, this, isCritHit);
                 enemydied?.Invoke();
                 controller.ChangeAnimation("Dead");
             }

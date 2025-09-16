@@ -137,7 +137,17 @@ public class CharacterMovement : MonoBehaviour, IJump
     {
         foreach (var attackAreaDamagables in attackArea.damagables)
         {
-            attackAreaDamagables.TakeDamage(character.damage, character.IsCriticalHit());
+            bool isCrit = character.IsCriticalHit();
+            if (!isCrit)
+            {
+                attackAreaDamagables.TakeDamage(character.damage, isCrit);
+            }
+            else
+            {
+                int damage = character.CalculateDamage();
+                attackAreaDamagables.TakeDamage(damage, isCrit);
+            }
+            
         }
     }
 }

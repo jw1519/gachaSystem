@@ -7408,8 +7408,8 @@ MonoBehaviour:
   maxHealth: 100
   damage: 5
   defence: 0
-  critPercent: 20
-  critDamagePercent: 0
+  critRate: 50
+  critDamage: 60
   energy: 0
   maxEnergy: 0
 --- !u!114 &1475810239

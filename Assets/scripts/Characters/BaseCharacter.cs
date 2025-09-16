@@ -18,8 +18,8 @@ namespace Character
         public int maxHealth;
         public int damage;
         public int defence;
-        public int critPercent;
-        public int critDamagePercent;
+        public int critRate;
+        public int critDamage;
 
         [Header("Energy")]
         public int energy;
@@ -80,7 +80,12 @@ namespace Character
         }
         public bool IsCriticalHit()
         {
-            return UnityEngine.Random.Range(0, 100) < critPercent;
+            return UnityEngine.Random.Range(0, 100) < critRate;
+        }
+        public int CalculateDamage()
+        {
+            int crit = Mathf.RoundToInt(damage * (1 + (critDamage/10)));
+            return crit;
         }
     }
 }
