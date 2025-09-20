@@ -31,12 +31,12 @@ public class CharacterMovement : MonoBehaviour, IJump
         playerInputActions = new InputSystem_Actions();
         animationController = GetComponent<CharacterAnimationContoller>();
         character = GetComponent<BaseCharacter>();
+        move = playerInputActions.Player.Move;
     }
     private void OnEnable()
     {
         playerInputActions.Player.Jump.started += Jump;
         playerInputActions.Player.Attack.started += Attack;
-        move = playerInputActions.Player.Move;
         playerInputActions.Enable();
     }
     private void OnDisable()
@@ -53,6 +53,19 @@ public class CharacterMovement : MonoBehaviour, IJump
         rb.AddForce(forceDirection, ForceMode.Impulse);
         animationController.CheckMovementAnimation(forceDirection, movementSpeed);
         forceDirection = Vector3.zero;
+
+        if (GameStateManager.instance.currentState == GameState.Pause)
+        {
+            playerInputActions.Player.Jump.started -= Jump;
+            playerInputActions.Player.Attack.started -= Attack;
+            playerInputActions.Disable();
+        }
+        else
+        {
+            playerInputActions.Player.Jump.started += Jump;
+            playerInputActions.Player.Attack.started += Attack;
+            playerInputActions.Enable();
+        }
     }
 
     private Vector3 GetCameraForward(Camera cam)
